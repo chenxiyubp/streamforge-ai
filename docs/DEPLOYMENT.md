@@ -1,11 +1,11 @@
 # 星流部署指南
 
-本指南依据仓库配置与代码整理。当前没有一键部署脚本，也未完成全套中间件联调；下述为可执行的构建入口与初始化清单，故障时请以服务日志定位，不能把进程启动等同于所有业务已通过验收。
+本指南依据仓库配置与代码整理。前后端构建已通过，当前没有一键部署脚本，也未完成全套中间件联调；下述为可执行的构建入口与初始化清单，故障时请以服务日志定位，不能把进程启动等同于所有业务已通过验收。
 
 ## 1. 环境与目录
 
-- Java：源码目标 Java 8，建议先用 JDK 8/11 与 Maven 3.8+ 进行兼容性验证。新 JDK 可能需要处理旧依赖兼容问题。
-- 前端：Vue CLI 5，Node.js 建议从 20 LTS 兼容环境验证；使用 pnpm（仓库包含 pnpm-lock.yaml）。
+- Java：源码目标 Java 8，本轮已用 Temurin JDK 17.0.20.1 与 Maven 3.9.9 打包成功。优先复用这个已验证组合，其他 JDK 版本仍需验证。
+- 前端：Vue CLI 5，本轮已用 Node.js 24.18.0、pnpm 11.25.0 打包成功；仓库包含 pnpm-lock.yaml。
 - 数据：MySQL 8（DDL 使用 utf8mb4_0900_ai_ci）、Redis、MinIO。
 - 服务组件：Nacos、RocketMQ nameserver + broker、Elasticsearch 7.13.3 对齐现有客户端；XXL-JOB 2.3.x 对齐客户端。
 - Zipkin 属于追踪组件，可独立准备。AI、短信与邮件需要自行开通相应服务，不在仓库内提供共享凭据。
@@ -115,7 +115,7 @@ cd vue
 复制 `.env.example` 为 `.env.local`，然后：
 
 ```bash
-pnpm install
+pnpm install --frozen-lockfile --ignore-scripts
 pnpm serve
 ```
 
