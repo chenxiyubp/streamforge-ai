@@ -4,7 +4,7 @@
 
 基于 Spring Boot / Spring Cloud 与 Vue 3 的前后端分离项目，覆盖视频上传、播放互动、用户关系、站内消息、聚合搜索及 AI 内容生成。适合学习微服务协作、媒体处理与异步数据同步，也可作为个人二次开发和项目展示的基础。
 
-[部署指南](docs/DEPLOYMENT.md) · [技术难点](docs/ARCHITECTURE.md) · [简历与面试材料](docs/RESUME_AND_INTERVIEW.md) · [整理与验证记录](docs/CHANGELOG.md) · [来源说明](NOTICE.md)
+[部署指南](docs/DEPLOYMENT.md) · [技术难点](docs/ARCHITECTURE.md) · [整理与验证记录](docs/CHANGELOG.md)
 
 > 本仓库由 chenxiyubp 基于提供的 aigcbilibili 项目整理维护。已通过前端生产打包和后端全部模块编译打包，尚未完成中间件与第三方接口的端到端验收。
 
@@ -28,7 +28,7 @@
 - **搜索与业务存储分离**：MySQL 保存业务数据，Elasticsearch 支撑检索，Redis 操作记录与定时任务组织数据同步。
 - **实时通信结合内容创作**：同一系统包含私聊与 AI 响应处理，可研究连接生命周期、会话隔离和消息持久化。
 - **部署入口可配置**：前端 API/WebSocket 代理改为本地默认地址；数据库、对象存储、邮件、短信、JWT 与 AI 凭据通过环境变量注入。
-- **便于二次开发**：去掉嵌套前端副本、运行日志和 IDE 文件，单独整理部署、设计取舍、简历及面试材料。
+- **便于二次开发**：去掉嵌套前端副本、运行日志和 IDE 文件，单独整理部署、设计取舍和构建验证材料。
 
 ## 技术栈与模块
 
@@ -84,8 +84,6 @@ sql.sql               MySQL 表结构（无业务数据）
 .env.example          后端环境变量清单
 docs/DEPLOYMENT.md     详细部署与排错
 docs/ARCHITECTURE.md   设计、源码入口及技术难点
-docs/RESUME_AND_INTERVIEW.md  集中的简历/面试材料
-NOTICE.md             来源与素材说明
 ```
 
 ## 当前验证范围
