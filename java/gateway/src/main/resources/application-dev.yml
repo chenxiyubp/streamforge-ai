@@ -1,0 +1,81 @@
+server:
+  port: 8200
+spring:
+  mail:
+    host: smtp.qq.com
+    default-encoding: UTF-8
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          socketFactory:
+            port: 465
+            class: javax.net.ssl.SSLSocketFactory
+            fallback: false
+
+
+  redis:
+    host: localhost
+  application:
+    name: gateway
+  zipkin:
+    base-url: http://localhost:9411
+    sender:
+      type: web
+    sleuth:
+      sampler:
+        probability: 1
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    name: datasource
+    url: jdbc:mysql://localhost:3306/bilibili?useUnicode=true&allowPublicKeyRetrieval=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT%2B8
+    username: ${DB_USER:root}
+    password: ${DB_PASSWORD}
+  cloud:
+    loadbalancer:
+      enabled: true
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: websocket
+          uri: ws://localhost:1688
+          predicates:
+            - Path=/ljl/chat
+        - id: route1
+          uri: http://localhost:30000
+          predicates:
+            - Path=/changeNoticeStatus/**,/getNotice/**
+        - id: route2
+          uri: http://localhost:3000
+          predicates:
+            - Path=/ensemble/**,/follow/**,/selfCenter/**,/userInfo/**
+        - id: route3
+          uri: http://localhost:10201
+          predicates:
+            - Path=/collect/**,/comment/**,/danmaku/**,/videoToEnsemble/**,/like/**,/createCenter/**,/play/**
+        - id: route4
+          uri: http://localhost:1688
+          predicates:
+            - Path=/chat/**
+        - id: route5
+          uri: http://localhost:8201
+          predicates:
+            - Path=/search/**
+
+
+module-name: gateway
+global-exception-handler:
+  enabled: false

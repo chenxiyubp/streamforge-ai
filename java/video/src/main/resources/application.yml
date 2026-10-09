@@ -1,0 +1,46 @@
+server:
+  port: 10201
+spring:
+  redis:
+    host: localhost
+  application:
+    name: video
+  zipkin:
+    base-url: http://localhost:9411 # zipkin服务地址
+    sender:
+      type: web
+    sleuth:
+      sampler:
+        probability: 1 # sleuth 日志记录采样率，1为100%，默认为0.1即10%
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 150MB
+      max-request-size: 350MB
+      location: ${java.io.tmpdir}
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    name: datasource
+    url: jdbc:mysql://localhost:3306/bilibili?useUnicode=true&allowPublicKeyRetrieval=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT%2B8
+    username: ${DB_USER:root}
+    password: ${DB_PASSWORD}
+
+
+
+minio:
+  url: http://localhost:9000
+  access.name: ${MINIO_ACCESS_KEY}
+  access.secret: ${MINIO_SECRET_KEY}
+rocketmq:
+  name-server: localhost:9876
+  producer:
+    group: producer
+module-name: video
+global-exception-handler:
+  enabled: true
+
+
+
+
+
+

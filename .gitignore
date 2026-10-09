@@ -1,0 +1,16 @@
+node_modules/
+target/
+dist/
+.idea/
+*.iml
+.DS_Store
+logs/
+*.log
+.env
+.env.*
+!.env.example
+application-local.yml
+*.pem
+*.key
+*.jks
+*.keystore
